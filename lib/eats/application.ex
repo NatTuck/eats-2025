@@ -17,7 +17,8 @@ defmodule Eats.Application do
       # Start a worker by calling: Eats.Worker.start_link(arg)
       # {Eats.Worker, arg},
       # Start to serve requests, typically the last entry
-      EatsWeb.Endpoint
+      EatsWeb.Endpoint,
+      Eats.Foods
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

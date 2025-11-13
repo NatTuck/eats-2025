@@ -65,7 +65,10 @@ defmodule Eats.MixProject do
       {:gettext, "~> 0.26"},
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.2.0"},
-      {:bandit, "~> 1.5"}
+      {:bandit, "~> 1.5"},
+      {:langchain, "0.4.0"},
+      {:ex_zstd, "~> 0.5.3", hex: :ex_zstd_reloaded},
+      {:fuzzy_compare, "~> 1.1"}
     ]
   end
 
