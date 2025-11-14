@@ -9,6 +9,10 @@ defmodule Eats.Foods do
     GenServer.call(__MODULE__, {:top_matches, text})
   end
 
+  def get_food(fdc_id) do
+    GenServer.call(__MODULE__, {:get_food, fdc_id})
+  end
+
   @impl true
   def init(_) do
     IO.puts("Loading foods...")
@@ -46,13 +50,17 @@ defmodule Eats.Foods do
   def handle_call({:top_matches, text}, _from, foods) do
     matches =
       for {id, food} <- foods do
-        descr = Map.get(food, "description")
-        score = FuzzyCompare.similarity(descr, text)
-        %{score: score, id: id, food: food}
+        desc = Map.get(food, "description")
+        score = FuzzyCompare.similarity(desc, text)
+        %{score: score, id: id, desc: desc}
       end
       |> Enum.sort_by(& &1.score, :desc)
-      |> Enum.take(5)
+      |> Enum.take(10)
 
     {:reply, matches, foods}
+  end
+
+  def handle_call({:get_food, fdc_id}, _from, foods) do
+    {:reply, Map.fetch(foods, fdc_id), foods}
   end
 end

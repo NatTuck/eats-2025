@@ -18,6 +18,13 @@ defmodule EatsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/eats", EatLive, :home
+
+    live "/snacks", SnackLive.Index, :index
+    live "/snacks/new", SnackLive.Form, :new
+    live "/snacks/:id", SnackLive.Show, :show
+    live "/snacks/:id/edit", SnackLive.Form, :edit
   end
 
   # Other scopes may use custom stacks.
